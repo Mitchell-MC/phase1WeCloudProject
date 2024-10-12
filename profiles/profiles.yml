@@ -1,0 +1,14 @@
+weCloudPipe:
+  target: dev
+  outputs:
+    dev:
+      account: OKKVFYZ-UY41334
+      database: TPCDS
+      password: Deadm@u5
+      role: AccountAdmin
+      schema: RAW
+      threads: 1
+      type: snowflake
+      user: MitchellMc
+      warehouse: TPCDS
+  target: dev
