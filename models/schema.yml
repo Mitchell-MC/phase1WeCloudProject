@@ -7,6 +7,7 @@ models:
     columns:
       - name: c_customer_sk
         tests:
+          - customer_demographics_coverage
           - not_null
           - assert_unique_active_records
       - name: c_current_addr_sk
