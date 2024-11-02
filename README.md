@@ -1,4 +1,28 @@
-Customer Dimension Model
+# Customer Dimension Model
+
+## Overview
+This project contains the **dbt models** and tests that define and validate our customer dimension data, with a primary focus on processing and handling customer demographics information. This model is designed to enable seamless integration with existing data platforms and provides configurable tests to ensure the reliability of demographic insights.
+
+## Demographics Coverage
+In our customer data model, not all customers are expected to have associated demographic information. This is purposefully designed to accommodate various real-world data scenarios, such as when demographic data is unavailable or inapplicable. The demographic data is represented within the `customer_dim` model as follows:
+
+- **Customers with `C_CURRENT_CDEMO_SK ≤ 480200`**: These customers have full demographic data, such as age, location, and income information.
+- **Customers with `C_CURRENT_CDEMO_SK > 480200`**: These customers do not have demographic data, which is handled by null values or default entries (e.g., ‘Unknown’).
+
+To monitor demographic completeness, we use custom tests that measure the proportion of customers with missing demographics. We allow up to **20%** of customers to have null or default demographics; if this threshold is exceeded, the test will fail, prompting further investigation.
+
+## Key Files and Directories
+- `dbt_project/models/customer_dim.sql`: The primary model for customer dimension data, transforming raw data into a format suitable for analytics.
+- `dbt_project/models/staging/sources.yml`: Defines the data sources and associated tests to ensure data integrity before transformation.
+- `dbt_project/models/schema.yml`: Contains schema-level configurations and column-level tests to validate data types, uniqueness, and referential integrity.
+- `dbt_project/tests/test_customer_demographics_coverage.sql`: Custom SQL test that monitors demographics coverage across the customer dataset, validating that the demographic null rate does not exceed the acceptable 20% threshold.
+
+## Installation
+Clone the repository and navigate to the project directory:
+
+```bash
+git clone https://github.com/Mitchell-MC/phase1WeCloudProject.git
+cd phase1WeCloudProjectCustomer Dimension Model
 Overview
 This project contains the dbt models and tests that define and validate our customer dimension data, with a primary focus on processing and handling customer demographics information. This model is designed to enable seamless integration with existing data platforms and provides configurable tests to ensure the reliability of demographic insights.
 
